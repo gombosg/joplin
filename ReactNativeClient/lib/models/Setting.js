@@ -230,6 +230,14 @@ class Setting extends BaseModel {
 					return options;
 				},
 			},
+			'theme.autodetect': {
+				value: false,
+				type: Setting.TYPE_BOOL,
+				public: true,
+				appTypes: ['desktop'],
+				label: () => _('Automatically set dark/light theme'),
+				section: 'appearance',
+			},
 			theme: {
 				value: Setting.THEME_LIGHT,
 				type: Setting.TYPE_INT,
@@ -251,6 +259,55 @@ class Setting extends BaseModel {
 						output[Setting.THEME_OLED_DARK] = _('OLED Dark');
 					}
 					return output;
+				},
+				show: settings => {
+					return settings['theme.autodetect'] === false;
+				},
+			},
+			'theme.preferredLightTheme': {
+				value: Setting.THEME_LIGHT,
+				type: Setting.TYPE_INT,
+				public: true,
+				appTypes: ['desktop'],
+				isEnum: true,
+				label: () => _('Preferred light theme'),
+				section: 'appearance',
+				options: () => {
+					let output = {};
+					output[Setting.THEME_LIGHT] = _('Light');
+					output[Setting.THEME_DARK] = _('Dark');
+					output[Setting.THEME_DRACULA] = _('Dracula');
+					output[Setting.THEME_SOLARIZED_LIGHT] = _('Solarised Light');
+					output[Setting.THEME_SOLARIZED_DARK] = _('Solarised Dark');
+					output[Setting.THEME_NORD] = _('Nord');
+					output[Setting.THEME_OLED_DARK] = _('OLED Dark');
+					return output;
+				},
+				show: settings => {
+					return settings['theme.autodetect'] === true;
+				},
+			},
+			'theme.preferredDarkTheme': {
+				value: Setting.THEME_DARK,
+				type: Setting.TYPE_INT,
+				public: true,
+				appTypes: ['desktop'],
+				isEnum: true,
+				label: () => _('Preferred dark theme'),
+				section: 'appearance',
+				options: () => {
+					let output = {};
+					output[Setting.THEME_LIGHT] = _('Light');
+					output[Setting.THEME_DARK] = _('Dark');
+					output[Setting.THEME_DRACULA] = _('Dracula');
+					output[Setting.THEME_SOLARIZED_LIGHT] = _('Solarised Light');
+					output[Setting.THEME_SOLARIZED_DARK] = _('Solarised Dark');
+					output[Setting.THEME_NORD] = _('Nord');
+					output[Setting.THEME_OLED_DARK] = _('OLED Dark');
+					return output;
+				},
+				show: settings => {
+					return settings['theme.autodetect'] === true;
 				},
 			},
 			showNoteCounts: { value: true, type: Setting.TYPE_BOOL, public: true, appTypes: ['desktop'], label: () => _('Show note counts') },

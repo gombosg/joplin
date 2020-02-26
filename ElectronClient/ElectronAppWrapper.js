@@ -4,6 +4,7 @@ const url = require('url');
 const path = require('path');
 const { dirname } = require('lib/path-utils');
 const fs = require('fs-extra');
+const os = require('os');
 
 class ElectronAppWrapper {
 
@@ -243,6 +244,16 @@ class ElectronAppWrapper {
 		if (alreadyRunning) return;
 
 		this.createWindow();
+
+		// custom devtools
+		// react
+		BrowserWindow.addDevToolsExtension(
+			path.join(os.homedir(), '/.config/chromium/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.4.0_0')
+		);
+		// redux
+		BrowserWindow.addDevToolsExtension(
+			path.join(os.homedir(), '/.config/chromium/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0')
+		);
 
 		this.electronApp_.on('before-quit', () => {
 			this.willQuitApp_ = true;

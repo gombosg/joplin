@@ -58,6 +58,9 @@ class Application extends BaseApplication {
 	constructor() {
 		super();
 		this.lastMenuScreen_ = null;
+		console.log('***DARK: ', bridge().nativeTheme.shouldUseDarkColors);
+		console.log('***DARK themeSource: ', bridge().nativeTheme.themeSource);
+		bridge().nativeTheme.addListener('updated', e=> console.log('THEME UPDATE', e));
 	}
 
 	hasGui() {

@@ -148,6 +148,10 @@ class Bridge {
 		return require('electron').screen;
 	}
 
+	get nativeTheme() {
+		return require('electron').nativeTheme;
+	}
+
 }
 
 let bridge_ = null;
